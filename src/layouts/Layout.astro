@@ -1,0 +1,57 @@
+---
+import '@fontsource-variable/inter';
+import '@fontsource-variable/jetbrains-mono';
+import '../styles/global.css';
+import { profile } from '../data/profile';
+import { getLangFromUrl } from '../i18n/utils';
+
+interface Props {
+  title?: string;
+}
+
+const lang = getLangFromUrl(Astro.url);
+const { title = `${profile.name} | ${profile.role[lang]}` } = Astro.props;
+const description = profile.summary[lang];
+---
+
+<!doctype html>
+<html lang={lang === 'pt' ? 'pt-BR' : 'en'}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+
+    <!-- precisa rodar antes da página aparecer, senão o tema claro "pisca" -->
+    <script is:inline>
+      document.documentElement.classList.add('js');
+      if (localStorage.getItem('theme') === 'light') {
+        document.documentElement.classList.add('light');
+      }
+    </script>
+  </head>
+  <body class="min-h-dvh">
+    <slot />
+
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { rootMargin: '0px 0px -8% 0px' },
+      );
+
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    </script>
+  </body>
+</html>

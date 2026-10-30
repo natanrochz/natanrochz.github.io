@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+@custom-variant light (&:where(.light, .light *));
+
+/* tema escuro (padrão) */
+:root {
+  --bg: #0b0d10;
+  --surface: #12151a;
+  --surface-2: #191d23;
+  --line: #242a31;
+  --fg: #e6e8eb;
+  --muted: #a0a8b2;
+  --subtle: #6f7781;
+  --accent: #5eead4;
+  --accent-fg: #042420;
+  color-scheme: dark;
+}
+
+/* tema claro */
+:root.light {
+  --bg: #fafaf9;
+  --surface: #ffffff;
+  --surface-2: #f2f3f5;
+  --line: #e3e5e8;
+  --fg: #12161b;
+  --muted: #4a5360;
+  --subtle: #6b7380;
+  --accent: #0f766e;
+  --accent-fg: #ffffff;
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    @apply bg-bg font-sans text-fg antialiased;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--accent) 30%, transparent);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@utility wrapper {
+  @apply mx-auto w-full max-w-5xl px-4 sm:px-6;
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-colors;
+}
+
+@utility btn-primary {
+  @apply btn bg-accent text-accent-fg hover:opacity-90;
+}
+
+@utility btn-secondary {
+  @apply btn border border-line bg-surface hover:border-accent hover:text-accent;
+}
+
+@utility icon-btn {
+  @apply inline-flex size-9 items-center justify-center rounded-lg text-muted transition-colors hover:bg-surface-2 hover:text-fg;
+}
+
+@utility tag {
+  @apply rounded-md border border-line bg-surface-2 px-2 py-0.5 font-mono text-xs text-muted;
+}
+
+@utility input {
+  @apply w-full rounded-lg border border-line bg-surface px-3.5 py-2.5 text-sm placeholder:text-subtle focus:border-accent focus:outline-none;
+}
+
+/* animação dos elementos aparecendo ao rolar a página */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.js .reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

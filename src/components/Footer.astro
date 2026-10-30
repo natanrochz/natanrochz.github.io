@@ -1,0 +1,18 @@
+---
+import { profile } from '../data/profile';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import ArrowUpIcon from '../icons/arrow-up.svg';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<footer class="border-t border-line">
+  <div class="wrapper flex flex-col items-center justify-between gap-4 py-8 text-sm text-subtle sm:flex-row">
+    <p>© {new Date().getFullYear()} {profile.name}. {t('footer.made')}</p>
+    <a href="#top" class="inline-flex items-center gap-1.5 transition-colors hover:text-accent">
+      {t('footer.top')}
+      <ArrowUpIcon class="size-4" />
+    </a>
+  </div>
+</footer>

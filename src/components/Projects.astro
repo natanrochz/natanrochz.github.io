@@ -1,0 +1,70 @@
+---
+import Section from './Section.astro';
+import { profile } from '../data/profile';
+import { projects } from '../data/projects';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import GithubIcon from '../icons/github.svg';
+import ExternalLinkIcon from '../icons/external-link.svg';
+import ArrowRightIcon from '../icons/arrow-right.svg';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Section id="projects" number="04" title={t('projects.title')}>
+  <div class="grid gap-5 md:grid-cols-2">
+    {
+      projects.map((project) => (
+        <article class="reveal flex flex-col overflow-hidden rounded-xl border border-line bg-surface transition-colors hover:border-accent/50">
+          {project.image && (
+            <img
+              src={project.image}
+              alt=""
+              width="640"
+              height="360"
+              loading="lazy"
+              class="aspect-video w-full border-b border-line object-cover"
+            />
+          )}
+
+          <div class="flex flex-1 flex-col p-6">
+            <div class="flex items-start justify-between gap-4">
+              <h3 class="text-lg font-medium">{project.title}</h3>
+              <div class="-mt-1.5 -mr-2 flex shrink-0">
+                {project.github && (
+                  <a href={project.github} target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label={t('projects.code')}>
+                    <GithubIcon class="size-[18px]" />
+                  </a>
+                )}
+                {project.demo && (
+                  <a href={project.demo} target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label={t('projects.demo')}>
+                    <ExternalLinkIcon class="size-[18px]" />
+                  </a>
+                )}
+              </div>
+            </div>
+
+            <p class="mt-3 flex-1 text-sm leading-relaxed text-muted">{project.description[lang]}</p>
+
+            <ul class="mt-5 flex flex-wrap gap-2">
+              {project.tech.map((tech) => (
+                <li class="tag">{tech}</li>
+              ))}
+            </ul>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+
+  <a
+    href={profile.github}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="mt-8 inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-accent"
+  >
+    <GithubIcon class="size-4" />
+    {t('projects.more')}
+    <ArrowRightIcon class="size-4" />
+  </a>
+</Section>

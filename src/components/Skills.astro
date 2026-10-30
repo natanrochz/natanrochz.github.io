@@ -1,0 +1,38 @@
+---
+import Section from './Section.astro';
+import { skills, learning } from '../data/skills';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Section id="skills" number="03" title={t('skills.title')}>
+  <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {
+      skills.map((group) => (
+        <div class="reveal rounded-xl border border-line bg-surface p-5">
+          <h3 class="font-mono text-sm text-subtle">{group.title[lang]}</h3>
+          <ul class="mt-4 flex flex-wrap gap-2">
+            {(Array.isArray(group.items) ? group.items : group.items[lang]).map((skill) => (
+              <li class="rounded-md border border-line bg-surface-2 px-2.5 py-1 text-sm">{skill}</li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+
+    {
+      learning.length > 0 && (
+        <div class="reveal rounded-xl border border-dashed border-line p-5">
+          <h3 class="font-mono text-sm text-subtle">{t('skills.learning')}</h3>
+          <ul class="mt-4 flex flex-wrap gap-2">
+            {learning.map((skill) => (
+              <li class="rounded-md border border-dashed border-subtle/60 px-2.5 py-1 text-sm text-muted">{skill}</li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+  </div>
+</Section>

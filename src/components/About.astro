@@ -1,0 +1,52 @@
+---
+import Section from './Section.astro';
+import { profile } from '../data/profile';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import MapPinIcon from '../icons/map-pin.svg';
+import GlobeIcon from '../icons/globe.svg';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Section id="about" number="01" title={t('about.title')}>
+  <div class="grid gap-12 md:grid-cols-[1fr_auto] md:items-start">
+    <div class="reveal max-w-2xl space-y-5 leading-relaxed text-muted">
+      {profile.about[lang].map((paragraph) => <p>{paragraph}</p>)}
+
+      <ul class="flex flex-wrap gap-x-6 gap-y-3 pt-3 text-sm">
+        <li class="flex items-center gap-2">
+          <MapPinIcon class="size-4 text-accent" />
+          {profile.location[lang]}
+        </li>
+        {
+          profile.remote && (
+            <li class="flex items-center gap-2">
+              <GlobeIcon class="size-4 text-accent" />
+              {t('about.remote')}
+            </li>
+          )
+        }
+      </ul>
+    </div>
+
+    <div class="reveal mx-auto md:mx-0">
+      {
+        profile.photo ? (
+          <img
+            src={profile.photo}
+            alt={profile.name}
+            width="224"
+            height="224"
+            loading="lazy"
+            class="size-48 rounded-2xl border border-line object-cover sm:size-56"
+          />
+        ) : (
+          <div class="flex size-48 items-center justify-center rounded-2xl border border-line bg-surface font-mono text-5xl font-semibold text-accent sm:size-56">
+            {profile.initials}
+          </div>
+        )
+      }
+    </div>
+  </div>
+</Section>

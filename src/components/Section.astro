@@ -1,0 +1,21 @@
+---
+interface Props {
+  id: string;
+  number: string;
+  title: string;
+}
+
+const { id, number, title } = Astro.props;
+---
+
+<section id={id} class="border-t border-line py-20 sm:py-24">
+  <div class="wrapper">
+    <h2 class="reveal flex items-baseline gap-3 text-2xl font-semibold tracking-tight sm:text-3xl">
+      <span class="font-mono text-base font-medium text-accent">{number}.</span>
+      {title}
+    </h2>
+    <div class="mt-10">
+      <slot />
+    </div>
+  </div>
+</section>
