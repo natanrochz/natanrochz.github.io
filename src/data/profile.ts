@@ -33,6 +33,7 @@ export const profile = {
     pt: 'Campo Grande - MS',
     en: 'Campo Grande - MS, Brazil',
   },
+  onsite: true,
   remote: true,
   about: {
     pt: [

@@ -26,6 +26,8 @@ const description = profile.summary[lang];
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content={lang === 'pt' ? 'pt_BR' : 'en_US'} />
+    <meta name="theme-color" content="#0b0d10" />
 
     <!-- precisa rodar antes da página aparecer, senão o tema claro "pisca" -->
     <script is:inline>

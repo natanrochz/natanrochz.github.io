@@ -3,6 +3,7 @@ import Section from './Section.astro';
 import { profile } from '../data/profile';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import MapPinIcon from '../icons/map-pin.svg';
+import BuildingIcon from '../icons/building.svg';
 import GlobeIcon from '../icons/globe.svg';
 
 const lang = getLangFromUrl(Astro.url);
@@ -14,15 +15,23 @@ const t = useTranslations(lang);
     <div class="reveal max-w-2xl space-y-5 leading-relaxed text-muted">
       {profile.about[lang].map((paragraph) => <p>{paragraph}</p>)}
 
-      <ul class="flex flex-wrap gap-x-6 gap-y-3 pt-3 text-sm">
+      <ul class="flex flex-col gap-2.5 pt-3 text-sm">
         <li class="flex items-center gap-2">
-          <MapPinIcon class="size-4 text-accent" />
+          <MapPinIcon class="size-4 shrink-0 text-accent" />
           {profile.location[lang]}
         </li>
         {
+          profile.onsite && (
+            <li class="flex items-center gap-2">
+              <BuildingIcon class="size-4 shrink-0 text-accent" />
+              {t('about.onsite')}
+            </li>
+          )
+        }
+        {
           profile.remote && (
             <li class="flex items-center gap-2">
-              <GlobeIcon class="size-4 text-accent" />
+              <GlobeIcon class="size-4 shrink-0 text-accent" />
               {t('about.remote')}
             </li>
           )

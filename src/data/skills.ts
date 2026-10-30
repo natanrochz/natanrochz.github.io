@@ -1,19 +1,23 @@
 export const skills = [
   {
     title: { pt: 'Linguagens', en: 'Languages' },
-    items: ['JavaScript', 'TypeScript', 'Python', 'Java', 'C', 'Go', 'SQL'],
+    items: ['JavaScript', 'TypeScript', 'Python', 'Java', 'C', 'Go'],
   },
   {
     title: { pt: 'Front-end', en: 'Front-end' },
-    items: ['React', 'Next.js', 'HTML', 'CSS', 'Tailwind CSS', 'Astro', 'Vite'],
+    items: ['React', 'Next.js', 'HTML', 'CSS', 'Tailwind CSS', 'Astro'],
   },
   {
-    title: { pt: 'Back-end e banco de dados', en: 'Back-end & databases' },
-    items: ['Node.js', 'Express', 'Django', 'PostgreSQL', 'Oracle'],
+    title: { pt: 'Back-end', en: 'Back-end' },
+    items: ['Node.js', 'Express', 'Django', 'JWT'],
+  },
+  {
+    title: { pt: 'Banco de dados', en: 'Databases' },
+    items: ['PostgreSQL', 'Oracle', 'SQL'],
   },
   {
     title: { pt: 'Ferramentas', en: 'Tools' },
-    items: ['Git', 'GitHub', 'Docker', 'Linux'],
+    items: ['Git', 'GitHub', 'Docker', 'Linux', 'Vite'],
   },
   {
     // essa lista muda de acordo com o idioma

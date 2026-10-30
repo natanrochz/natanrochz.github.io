@@ -10,6 +10,10 @@ export default defineConfig({
     defaultLocale: 'pt',
   },
 
+  build: {
+    inlineStylesheets: 'always',
+  },
+
   vite: {
     plugins: [tailwindcss()],
   },

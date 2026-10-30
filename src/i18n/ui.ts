@@ -22,6 +22,7 @@ export const ui = {
     'hero.resume': 'Baixar currículo',
 
     'about.title': 'Sobre mim',
+    'about.onsite': 'Aberto a trabalho presencial em Campo Grande - MS',
     'about.remote': 'Aberto a trabalho remoto',
 
     'experience.title': 'Formação e experiência',
@@ -33,6 +34,7 @@ export const ui = {
     'projects.code': 'Código',
     'projects.demo': 'Ver online',
     'projects.more': 'Mais projetos no GitHub',
+    'projects.private': 'Repositório privado',
 
     'contact.title': 'Contato',
     'contact.text': 'Quer conversar sobre uma vaga, um projeto ou só trocar uma ideia? Me manda um e-mail ou me chama no LinkedIn.',
@@ -62,6 +64,7 @@ export const ui = {
     'hero.resume': 'Download resume',
 
     'about.title': 'About me',
+    'about.onsite': 'Open to on-site work in Campo Grande - MS',
     'about.remote': 'Open to remote work',
 
     'experience.title': 'Education & experience',
@@ -73,6 +76,7 @@ export const ui = {
     'projects.code': 'Code',
     'projects.demo': 'Live demo',
     'projects.more': 'More projects on GitHub',
+    'projects.private': 'Private repository',
 
     'contact.title': 'Contact',
     'contact.text': 'Want to talk about a job, a project or just say hi? Send me an email or reach out on LinkedIn.',

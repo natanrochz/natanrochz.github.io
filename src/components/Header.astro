@@ -4,6 +4,7 @@ import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import SunIcon from '../icons/sun.svg';
 import MoonIcon from '../icons/moon.svg';
 import MenuIcon from '../icons/menu.svg';
+import XIcon from '../icons/x.svg';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -47,6 +48,7 @@ const links = [
     <div class="flex items-center gap-1">
       <a
         href={lang === 'pt' ? '/en/' : '/'}
+        hreflang={lang === 'pt' ? 'en' : 'pt-BR'}
         class="icon-btn w-auto px-2.5 font-mono text-xs font-semibold"
         title={t('nav.lang')}
       >
@@ -61,12 +63,13 @@ const links = [
       <button
         id="menu-btn"
         type="button"
-        class="icon-btn md:hidden"
+        class="group icon-btn md:hidden"
         aria-label={t('nav.menu')}
         aria-expanded="false"
         aria-controls="mobile-menu"
       >
-        <MenuIcon class="size-5" />
+        <MenuIcon class="size-5 group-aria-expanded:hidden" />
+        <XIcon class="hidden size-5 group-aria-expanded:block" />
       </button>
     </div>
   </div>
@@ -105,8 +108,12 @@ const links = [
     toggleMenu(menuBtn.getAttribute('aria-expanded') === 'false');
   });
 
-  // fecha o menu quando clica em algum link
+  // fecha o menu quando clica em algum link ou aperta Esc
   mobileMenu?.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', () => toggleMenu(false));
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') toggleMenu(false);
   });
 </script>
