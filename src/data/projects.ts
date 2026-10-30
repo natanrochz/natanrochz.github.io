@@ -40,7 +40,7 @@ export const projects = [
       en: 'This website. Built with Astro and Tailwind, in Portuguese and English, with light and dark themes.',
     },
     tech: ['Astro', 'TypeScript', 'Tailwind CSS'],
-    github: 'https://github.com/natanrochz/Portfolio',
+    github: 'https://github.com/natanrochz/natanrochz.github.io',
     demo: '',
     image: '',
   },

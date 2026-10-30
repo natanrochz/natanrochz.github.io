@@ -12,6 +12,8 @@ interface Props {
 const lang = getLangFromUrl(Astro.url);
 const { title = `${profile.name} | ${profile.role[lang]}` } = Astro.props;
 const description = profile.summary[lang];
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(`/og/${lang}.png`, Astro.site);
 ---
 
 <!doctype html>
@@ -23,10 +25,17 @@ const description = profile.summary[lang];
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="pt-BR" href={new URL('/', Astro.site)} />
+    <link rel="alternate" hreflang="en" href={new URL('/en/', Astro.site)} />
+
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
     <meta property="og:locale" content={lang === 'pt' ? 'pt_BR' : 'en_US'} />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="theme-color" content="#0b0d10" />
 
     <!-- precisa rodar antes da página aparecer, senão o tema claro "pisca" -->
